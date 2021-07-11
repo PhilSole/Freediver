@@ -1,0 +1,31 @@
+{
+  "name": "freediver",
+  "version": "1.0.0",
+  "description": "Freediver is an idea for relaxing, fun, and challenging game where you are a freediver navigating a 2D underwater world.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilSole/Freediver.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Philip Sole",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/PhilSole/Freediver/issues"
+  },
+  "homepage": "https://github.com/PhilSole/Freediver#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.4",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^5.0.0",
+    "node-sass": "^6.0.1"
+  }
+}
