@@ -28,7 +28,7 @@ function styles() {
 
 function serve(cb) {
     server.init({
-        proxy: 'http://127.0.0.1:5500/',
+        proxy: 'http://127.0.0.1:5501/',
     });
     cb();
 }
