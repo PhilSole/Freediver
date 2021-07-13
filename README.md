@@ -3,11 +3,11 @@ Freediver is an idea for relaxing, fun, and challenging game where you are a fre
 
 ## Credits
 
-### Design
-
-#### Inspiration
+### Design Inspiration
 
 * Swimmer sprite by [chasersgaming](https://opengameart.org/users/chasersgaming)
+
+## Ideation
 
 #### 2D Physics mechanics
 
@@ -18,3 +18,7 @@ Freediver is an idea for relaxing, fun, and challenging game where you are a fre
 * *Body follow path* - Characters can follow a path until within a certain distance from other characters before breaking free of the path.
 
 * *Raycasting* - Could be used to give AI characters awareness of surroundings e.g. proximity to walls causes change in motion.
+
+* *Chamfer* - Could make for less janky friction between characters and terrain.
+
+* *Sensor* - Bodies can act as collision sensors without physical properties. Similar use to raycasting idea above.

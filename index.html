@@ -32,10 +32,16 @@
             physics: {
                 default: 'matter',
                 matter: {
-                    debug: true,
+                    debug: { // See debug options.js example
+                        showAngleIndicator: true,
+                        showCollisions: true,
+                        showSleeping: true,
+                        showJoint: true,
+                    },
                     enableSleeping: true, // Performance gain - Bodies that come to rest can sleep and wake. https://github.com/liabru/matter-js/issues/354
                     gravity: { 
-                        y: -0.0257 
+                        // y: -0.0257 
+                        scale: 0
                     },
                     plugins: {
                         attractors: true
@@ -69,6 +75,7 @@
                 frameHeight: 32 
             });
             this.load.image('alien', 'assets/sprites/space-baddie.png');
+            this.load.image('ball', 'assets/sprites/shinyball.png');
         }
 
 
@@ -126,17 +133,26 @@
             player = this.matter.add.gameObject(playerSprite, {
                 frictionAir: 0.01,
                 bounce: 0.2,
-                plugin: {
-                    attractors: [
-                        function (bodyA, bodyB) {
-                            return {
-                                x: (bodyA.position.x - bodyB.position.x) * 0.0000002,
-                                y: (bodyA.position.y - bodyB.position.y) * 0.0000002
-                            };
-                        }
-                    ]
-                }
-            })
+                chamfer: {
+                    radius: 16
+                },
+                // plugin: {
+                //     attractors: [
+                //         function (bodyA, bodyB) {
+                //             return {
+                //                 x: (bodyA.position.x - bodyB.position.x) * 0.0000002,
+                //                 y: (bodyA.position.y - bodyB.position.y) * 0.0000002
+                //             };
+                //         }
+                //     ]
+                // }
+            });
+
+            // player.setBody({
+            //     type: 'rectangle',
+            //     width: 48,
+            //     height: 12
+            // });
             
             this.anims.create({
                 key: 'left',
@@ -167,18 +183,97 @@
             //===========================
             // Other characters
             //===========================
-            this.matter.add.image(400, 400, 'alien', null, {
+            var alien = this.matter.add.image(400, 400, 'alien', null, {
                 mass: 1,
                 ignorePointer: true
             });
+
+            
+
+            //===========================
+            // Physics experiments
+            //===========================
+            // MatterCollisionFilter - for later
+            var canDrag = this.matter.world.nextGroup();
+
+            var ballA = this.matter.add.image(400, 50, 'ball', null, { shape: 'circle', friction: 0.005, restitution: 0.6 }).setCollisionGroup(canDrag);
+            var ballB = this.matter.add.image(400, 150, 'ball', null, { shape: 'circle', friction: 0.005, restitution: 0.6, mass: 1 });
+            var ballC = this.matter.add.image(400, 250, 'ball', null, { 
+                shape: 'circle', 
+                friction: 0.005, 
+                restitution: 0.6, 
+                mass: 1,
+                plugin: {
+                    attractors: [
+                        function (bodyA, bodyB) {
+                            // console.log(bodyA, bodyB);
+                            // return {
+                            //     x: (bodyA.position.x - bodyB.position.x) * 0.0000002,
+                            //     y: (bodyA.position.y - bodyB.position.y) * 0.0000002
+                            // };
+                        }
+                    ]
+                } 
+            });
+
+            this.matter.add.constraint(ballA, ballB, 100, 1, {
+                angularStiffness: 1,
+            });  
+            
+            this.matter.add.constraint(ballB, ballC, 100, 1, {
+                angularStiffness: 1,
+            });
+
+            var Bodies = Phaser.Physics.Matter.Matter.Bodies;
+            var rectA = Bodies.rectangle(500, 100, 50, 10);
+            var rectB = Bodies.rectangle(500, 120, 50, 10);
+
+            var compoundBody = Phaser.Physics.Matter.Matter.Body.create({
+                parts: [ rectA, rectB ]
+            }); 
+            
+            var block = this.matter.add.image(150, 20, 'ball', null);
+
+            block.setExistingBody(compoundBody).setCollisionGroup(canDrag);
+
+            var part1 = this.add.rectangle(0, -20, 60, 10, { restitution: 0.1 });
+            var part2 = this.add.rectangle(0, 20, 60, 10, { restitution: 0.1 });
+
+            container = this.add.container(400, 300, [ part1, part2 ]);
+            container.setSize(60, 50);
+            // container.setOrigin(30, 60);
+            var physicsContainer = this.matter.add.gameObject(container);
+
             
             //===========================
             // Controls
             //===========================
+           
+
             cursors = this.input.keyboard.createCursorKeys();
-            this.matter.add.mouseSpring();
+            this.matter.add.mouseSpring({ length: 1, stiffness: 0.6, collisionFilter: { group: canDrag } });
 
             console.log(this);
+
+            var enough = 0;
+            this.input.on('pointerdown', function (pointer) {
+                if(enough < 5) {
+                    var previous = this.matter.add.polygon(pointer.x, pointer.y, 3, 30);
+                    ++enough;
+                }
+            }, this); 
+            
+            this.input.on('pointermove', function (pointer) {
+
+                if(pointer.isDown) {
+                    this.matter.add.polygon(pointer.x, pointer.y, 3, 30);
+                }
+
+            }, this);
+
+            this.input.once('pointerup', function () {
+                alien.destroy();
+            });            
         }
 
 
@@ -210,6 +305,8 @@
             if (cursors.up.isDown) {
                 player.setVelocityY(-4);
             } 
+
+            // game.destroy(); // Destroys the game if stuck in infinite loop
         }        
     </script> 
 </body>
