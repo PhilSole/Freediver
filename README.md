@@ -1,10 +1,4 @@
-        ___    __                __     ______                   ___                
-       /   |  / /_  ____  __  __/ /_   / ____/_______  ___  ____/ (_)   _____  _____
-      / /| | / __ \/ __ \/ / / / __/  / /_  / ___/ _ \/ _ \/ __  / / | / / _ \/ ___/
-     / ___ |/ /_/ / /_/ / /_/ / /_   / __/ / /  /  __/  __/ /_/ / /| |/ /  __/ /    
-    /_/  |_/_.___/\____/\__,_/\__/  /_/   /_/   \___/\___/\__,_/_/ |___/\___/_/     
-                                                                                
-# Freediver
+# About Freediver
 Freediver is an idea for relaxing, fun, and challenging game where you are a freediver navigating a 2D underwater world.
 
 ## Credits
