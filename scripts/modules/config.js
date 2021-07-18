@@ -16,9 +16,9 @@ FD.config = {
                 showSleeping: true,
                 showJoint: true,
             },
-            enableSleeping: true, // Performance gain - Bodies that come to rest can sleep and wake. https://github.com/liabru/matter-js/issues/354
+            enableSleeping: false, // Performance gain - Bodies that come to rest can sleep and wake. https://github.com/liabru/matter-js/issues/354
             gravity: { 
-                y: 1 
+                y: .15 
             },
             plugins: {
                 attractors: true

@@ -12,10 +12,10 @@ const server = browserSync.create();
 
 function scripts() {
     return src(['scripts/modules/globals.js',
-        'scripts/modules/config.js',
         'scripts/modules/preload.js',
         'scripts/modules/create.js',
         'scripts/modules/update.js',
+        'scripts/modules/config.js',
         'scripts/main.js'])
     .pipe(plumber())
     .pipe(concat('custom.min.js'))

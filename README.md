@@ -50,6 +50,11 @@ Freediver is an idea for relaxing, fun, and challenging game where you are a fre
 * Force N
 * Resistance
 
+## Game physics units
+* Distance is set to 15px per metre
+* Gravity is set to 0.15
+* Friction isn't calculated relative to shape. I'd need my own function for that.
+
 
 ### Swimmer movement/mechanics
 

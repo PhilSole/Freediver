@@ -7,7 +7,7 @@ FD.create = function() {
     let worldWidth = 640;
     let worldHeight = 360;
 
-    this.matter.world.setBounds(0, 0, worldWidth, worldHeight); 
+    this.matter.world.setBounds(0, 0, worldWidth, worldHeight, 64, true, true, false, true); 
     
     
     //===========================
@@ -37,10 +37,12 @@ FD.create = function() {
     //===========================
     // Physics experiments
     //===========================
-    FD.circle1 = this.matter.add.circle(100, 0, 15, {
-        angle: 1,
-        restitution: 1,
-        frictionAir: .5
+    let circle = this.add.circle(100, 15, 15);
+
+    FD.circle1 = this.matter.add.gameObject(circle, {
+        shape: 'circle',
+        // frictionAir: 0.1,
+        density: 2
     });
 
     
@@ -48,5 +50,9 @@ FD.create = function() {
     // Controls
     //===========================
     this.matter.add.mouseSpring();
+
+    this.input.on('pointerdown', function (pointer) {
+        console.log('click');
+    }, this);    
          
 }
