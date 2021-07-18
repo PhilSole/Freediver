@@ -11,8 +11,12 @@ const browserSync = require('browser-sync');
 const server = browserSync.create();
 
 function scripts() {
-    return src(['scripts/main.js'
-    ])
+    return src(['scripts/modules/globals.js',
+        'scripts/modules/config.js',
+        'scripts/modules/preload.js',
+        'scripts/modules/create.js',
+        'scripts/modules/update.js',
+        'scripts/main.js'])
     .pipe(plumber())
     .pipe(concat('custom.min.js'))
     .pipe(dest('./scripts'));
@@ -41,6 +45,7 @@ function reload(cb) {
 function watching(cb) {
     watch(['./index.html',
             './styles/**/*.scss', 
+            './scripts/modules/*.js',
             './scripts/main.js'],
             {delay: 400 },
             series(scripts, styles, reload));

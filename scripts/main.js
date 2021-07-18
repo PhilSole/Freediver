@@ -1,5 +1,3 @@
-const FD = {};
-
 function ready(callbackFunc) {
     if (document.readyState !== 'loading') {
         callbackFunc();
@@ -10,4 +8,6 @@ function ready(callbackFunc) {
 
 ready(function () {
     console.log('under way');
+
+    FD.game = new Phaser.Game(FD.config);
 });
