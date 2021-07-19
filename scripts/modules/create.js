@@ -37,12 +37,12 @@ FD.create = function() {
     //===========================
     // Physics experiments
     //===========================
-    let circle = this.add.circle(100, 15, 15);
+    let circle = this.add.circle(320, 180, 15);
 
     FD.circle1 = this.matter.add.gameObject(circle, {
         shape: 'circle',
-        // frictionAir: 0.1,
-        density: 2
+        frictionAir: 0.03,
+        density: 0.1161
     });
 
     

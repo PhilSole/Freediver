@@ -1,5 +1,19 @@
+
+let buoyancyConstant = 75.5 * 1.025 * .00015;
+console.log(buoyancyConstant);
+
+
 FD.update = function(a, b) {
-    FD.circle1.applyForce({x:0, y: -.14});
+    let depth = FD.circle1.body.position.y/15;
+    let pressure = depth * 1025 * 9.8 + 100000;
+    let pressureRatio = 100000/pressure;
+    let airVolume = 10 * pressureRatio;
+    let buoyancyVariable = airVolume * 1.025 * 0.00015;
+    let buoyancyTotal = buoyancyConstant + buoyancyVariable;
+
+    console.log(airVolume);
+
+    FD.circle1.applyForce({x:0, y: -buoyancyTotal});
 } 
 
 // ======================================

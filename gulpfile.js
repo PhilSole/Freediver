@@ -1,4 +1,4 @@
-/* Node 14.17.3 */
+/* Node 12.16.1 */
 
 const { watch, series, src, dest } = require('gulp');
 
