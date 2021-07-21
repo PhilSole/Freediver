@@ -11,9 +11,15 @@ FD.update = function(a, b) {
     let buoyancyVariable = airVolume * 1.025 * 0.00015;
     let buoyancyTotal = buoyancyConstant + buoyancyVariable;
 
-    console.log(airVolume);
+    // console.log(airVolume);
 
     FD.circle1.applyForce({x:0, y: -buoyancyTotal});
+
+    FD.data.setText([
+        'Depth: ' + parseInt(FD.circle1.body.position.y / 15) + 'm',
+        'Pressure: ' + (pressure/100000).toFixed(1) + 'BAR',
+        'Lung volume: ' + airVolume.toFixed(1) + 'L',
+    ])
 } 
 
 // ======================================

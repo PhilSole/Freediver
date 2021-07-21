@@ -7,16 +7,17 @@ FD.create = function() {
     let worldWidth = 640;
     let worldHeight = 360;
 
-    this.matter.world.setBounds(0, 0, worldWidth, worldHeight, 64, true, true, false, true); 
+    this.cameras.main.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight);
+    this.matter.world.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight, 64, true, true, false, true); 
     
     
     //===========================
     // Background
     //===========================
-    // let background = this.add.image(worldWidth/2, worldHeight/2, 'water');
+    let background = this.add.image(-2.5 * worldWidth, 0, 'water').setOrigin(0);
 
-    // background.displayWidth = worldWidth;
-    // background.displayHeight = worldHeight;
+    background.displayWidth = 5 * worldWidth;
+    background.displayHeight = 5 * worldHeight;
 
 
     //===========================
@@ -41,9 +42,24 @@ FD.create = function() {
 
     FD.circle1 = this.matter.add.gameObject(circle, {
         shape: 'circle',
-        frictionAir: 0.03,
+        frictionAir: 0.0027,
         density: 0.1161
     });
+
+    //===========================
+    // Camera
+    //===========================    
+    this.cameras.main.setDeadzone(100, 100);
+    this.cameras.main.startFollow(FD.circle1, true);
+    this.cameras.main.setZoom(1);
+
+    //===========================
+    // Data
+    //===========================
+    FD.data = this.add.text(15, 15)
+            .setText(['Depth: ', 'Pressure: ', 'Lung volume: '])
+            .setScrollFactor(0);
+            FD.data.setShadow(1, 1, '#000000', 2);
 
     
     //===========================
