@@ -1,5 +1,5 @@
 # About Freediver
-Freediver is an idea for relaxing, fun, and challenging game where you are a freediver navigating a 2D underwater world.
+[Freediver](https://philsole.github.io/Freediver/) is an idea for relaxing, fun, and challenging game where you are a freediver navigating a 2D underwater world.
 
 ## Inspiration
 

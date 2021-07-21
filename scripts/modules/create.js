@@ -57,7 +57,7 @@ FD.create = function() {
     // Data
     //===========================
     FD.data = this.add.text(15, 15)
-            .setText(['Depth: ', 'Pressure: ', 'Lung volume: '])
+            .setText(['Depth: ', 'Pressure: ', 'Lung volume: ', 'Oxygen: '])
             .setScrollFactor(0);
             FD.data.setShadow(1, 1, '#000000', 2);
 
