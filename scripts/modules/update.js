@@ -7,7 +7,9 @@ FD.timeStart = 0;
 FD.timeElapsed = 0
 
 FD.update = function(time, delta) {
-    // console.log('updating game scene');
+
+    // console.log(FD.circle1.body);
+
     // Calculate buoyancy force
     let depth = FD.circle1.body.position.y/15;
     let pressure = depth * 1025 * 9.8 + 100000;
@@ -17,14 +19,29 @@ FD.update = function(time, delta) {
     let buoyancyTotal = buoyancyConstant + buoyancyVariable;
 
     // Pointer (swimming) force
-    let swimX = this.input.mousePointer.worldX;
-    let swimY = this.input.mousePointer.worldY;
+    let pointer = this.input.activePointer;
+    let swimVec = new Phaser.Math.Vector2();
 
-    // console.log(swimX, swimY);
-    // console.log(FD.circle1.body.position);
+    if(pointer.isDown) {
+        console.log(pointer);
+        let pointerX = pointer.worldX;
+        let pointerY = pointer.worldY;
+    
+        let playerX = FD.circle1.body.position.x;
+        let playerY = FD.circle1.body.position.y;
+
+        swimVec.set(pointerX - playerX, pointerY - playerY);
+        swimVec.setLength(.0013);
+
+        // console.log(swimVec.angle());
+
+        FD.circle1.setRotation(swimVec.angle());
+    }
+
+    swimVec.add({x:0, y: -buoyancyTotal});
 
     // Apply total forces
-    FD.circle1.applyForce({x:0, y: -buoyancyTotal});
+    FD.circle1.applyForce(swimVec);
 
     // Calculate remaining oxygen
     if(FD.timeStart == 0) {

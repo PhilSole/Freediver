@@ -42,7 +42,7 @@ FD.config = {
     pixelArt: true, // pixel graphics won't blur when scaling. https://www.html5gamedevs.com/topic/36607-scaling-the-canvas-for-pixel-art/
     scale: {
         // parent: 'yourgamediv',
-        // mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         // width: 800,
         // height: 600

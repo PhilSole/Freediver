@@ -40,7 +40,7 @@ FD.create = function() {
     //===========================
     // Physics experiments
     //===========================
-    let circle = this.add.circle(60, 420, 15);
+    let circle = this.add.circle(60, 90, 15);
 
     FD.circle1 = this.matter.add.gameObject(circle, {
         shape: 'circle',
@@ -68,11 +68,13 @@ FD.create = function() {
     // Controls
     //===========================
     // this.input.setDefaultCursor('url(assets/input/cursors/blue.cur), pointer');
-    this.matter.add.mouseSpring();
+    // this.matter.add.mouseSpring();
 
     // this.input.on('pointerdown', function (pointer) {
     //     console.log('click');
     // }, this);  
+
+    this.input.setPollRate(200); // Fixed and issue where pointer wasn't polled if mouse wasn't moving for a few seconds
     
     let pause = this.add.image(600, 40, 'stop').setScrollFactor(0).setInteractive();
 
