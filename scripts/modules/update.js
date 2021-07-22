@@ -7,6 +7,7 @@ FD.timeStart = 0;
 FD.timeElapsed = 0
 
 FD.update = function(time, delta) {
+    // console.log('updating game scene');
     // Calculate buoyancy force
     let depth = FD.circle1.body.position.y/15;
     let pressure = depth * 1025 * 9.8 + 100000;
@@ -15,6 +16,14 @@ FD.update = function(time, delta) {
     let buoyancyVariable = airVolume * 1.025 * 0.00015;
     let buoyancyTotal = buoyancyConstant + buoyancyVariable;
 
+    // Pointer (swimming) force
+    let swimX = this.input.mousePointer.worldX;
+    let swimY = this.input.mousePointer.worldY;
+
+    // console.log(swimX, swimY);
+    // console.log(FD.circle1.body.position);
+
+    // Apply total forces
     FD.circle1.applyForce({x:0, y: -buoyancyTotal});
 
     // Calculate remaining oxygen
@@ -53,3 +62,7 @@ FD.update = function(time, delta) {
 //     console.log(FD.circle1);
 //     FD.game.destroy();
 // }
+
+FD.updatePause = function(time, delta) {
+    // console.log('updating pause');
+}

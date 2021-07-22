@@ -1,12 +1,7 @@
 FD.metre = 15;
 
-FD.config = {
-    type: Phaser.AUTO, // Either WebGL or canvas
-    width: 640,
-    height: 360,
-    backgroundColor: '#c4dedf',
-    parent: 'gameContainer',
-    pixelArt: true, // pixel graphics won't blur when scaling. https://www.html5gamedevs.com/topic/36607-scaling-the-canvas-for-pixel-art/
+FD.gameSceneConfig = {
+    key: 'gameScene',
     physics: {
         default: 'matter',
         matter: {
@@ -25,6 +20,26 @@ FD.config = {
             }
         }
     },
+    preload: FD.preload,
+    create: FD.create,
+    update: FD.update    
+}
+
+FD.pauseSceneConfig = {
+    key: 'pauseScene',
+    preload: FD.preloadPause,
+    create: FD.createPause,
+    update: FD.updatePause
+}
+
+FD.config = {
+    type: Phaser.AUTO, // Either WebGL or canvas
+    parent: 'gameContainer',
+    width: 640,
+    height: 360,
+    resolution: window.devicePixelRatio,
+    backgroundColor: '#c4dedf',
+    pixelArt: true, // pixel graphics won't blur when scaling. https://www.html5gamedevs.com/topic/36607-scaling-the-canvas-for-pixel-art/
     scale: {
         // parent: 'yourgamediv',
         // mode: Phaser.Scale.FIT,
@@ -32,9 +47,5 @@ FD.config = {
         // width: 800,
         // height: 600
     },
-    scene: {
-        preload: FD.preload,
-        create: FD.create,
-        update: FD.update
-    }
+    scene: [FD.gameSceneConfig, FD.pauseSceneConfig]
 };

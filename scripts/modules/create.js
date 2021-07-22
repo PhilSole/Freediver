@@ -1,6 +1,8 @@
 FD.create = function() {
     console.log('create');
 
+    let theScene = this.scene;
+
     //===========================
     // World
     //===========================
@@ -8,7 +10,7 @@ FD.create = function() {
     let worldHeight = 360;
 
     this.cameras.main.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight);
-    this.matter.world.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight, 64, true, true, false, true); 
+    this.matter.world.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight, 64, true, true, true, true); 
     
     
     //===========================
@@ -49,8 +51,8 @@ FD.create = function() {
     //===========================
     // Camera
     //===========================    
-    this.cameras.main.setDeadzone(100, 100);
-    this.cameras.main.startFollow(FD.circle1, true);
+    // this.cameras.main.setDeadzone(30, 30);
+    this.cameras.main.startFollow(FD.circle1, true, 0.05, 0.05); // lerp (linear interpolation for follow)
     this.cameras.main.setZoom(1);
 
     //===========================
@@ -65,10 +67,31 @@ FD.create = function() {
     //===========================
     // Controls
     //===========================
+    // this.input.setDefaultCursor('url(assets/input/cursors/blue.cur), pointer');
     this.matter.add.mouseSpring();
 
-    this.input.on('pointerdown', function (pointer) {
-        console.log('click');
-    }, this);    
+    // this.input.on('pointerdown', function (pointer) {
+    //     console.log('click');
+    // }, this);  
+    
+    let pause = this.add.image(600, 40, 'stop').setScrollFactor(0).setInteractive();
+
+    pause.displayWidth = 40;
+    pause.displayHeight = 40;
+
+    pause.on('pointerdown', function () { 
+        theScene.pause();
+        theScene.run('pauseScene');
+    });
          
+}
+
+FD.createPause = function() {
+    console.log('create pause');
+    let theScene = this.scene;
+
+    this.input.on('pointerdown', function (pointer) {
+        theScene.pause();
+        theScene.run('gameScene');
+    }, this);    
 }

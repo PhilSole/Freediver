@@ -36,6 +36,7 @@
 * **Oxygen, pressure and body**
     - Total Lung capacity average is about 6 litres. Efficiency can be increased but not total volume. World record about 12 litres total volume.
     - Volume of air is divided by every 10m unit of depth. e.g 10m = 1/2 volume, 20m = 1/3 volume.
+* **Hand signals** - use [hand signals from real diving](https://www.tripsavvy.com/common-hand-signals-for-scuba-diving-2963222) to indicate swimmer needs to equalize, or stop, or shark.
 
 ## General physics concepts
 * Mass kg
@@ -62,6 +63,7 @@
 * **Pick up rock** - Gives the swimmer weight to go deep quickly. Perhaps conserve oxygen. Run along sea floor. Drop somewhere to affect environment.
 * **Pull along rope/beam etc** - 
 * **Buoyancy** - The average density of the human body, after maximum inhalation of air, changes to 945 kg/m3 and the typical density of seawater is about 1020 kg/m3. Fresh water 1000 kg/m3. Upward force is equal to the weight of the water displaced.
+* **Sprint swim** - Pointer position provides direction, then rapid "scrubbing" signals swim speed desired.
 
 ### Resources
 
