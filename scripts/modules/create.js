@@ -30,7 +30,25 @@ FD.create = function() {
     //===========================
     // Player
     //===========================
+    let playerSprite = this.add.sprite(100, 150, 'swimmer');
+    FD.circle1 = this.matter.add.gameObject(playerSprite, {
+        frictionAir: 0.0027,
+        density: .046
+    });
 
+    FD.circle1.anims.create({
+        key: 'swimLeft',
+        frames: this.anims.generateFrameNumbers('swimmer', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    FD.circle1.anims.create({
+        key: 'swimRight',
+        frames: this.anims.generateFrameNumbers('swimmer', { start: 8, end: 15 }),
+        frameRate: 10,
+        repeat: -1
+    });    
 
     //===========================
     // Other characters
@@ -42,11 +60,11 @@ FD.create = function() {
     //===========================
     let circle = this.add.circle(60, 90, 15);
 
-    FD.circle1 = this.matter.add.gameObject(circle, {
-        shape: 'circle',
-        frictionAir: 0.0027,
-        density: 0.1161
-    });
+    // FD.circle1 = this.matter.add.gameObject(circle, {
+    //     shape: 'circle',
+    //     frictionAir: 0.0027,
+    //     density: 0.1161
+    // });
 
     //===========================
     // Camera

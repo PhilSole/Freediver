@@ -8,7 +8,17 @@ FD.timeElapsed = 0
 
 FD.update = function(time, delta) {
 
-    // console.log(FD.circle1.body);
+    let player = FD.circle1;
+
+    if(player.body.velocity.x > 0.1) {
+        player.anims.play('swimRight', true);
+    } else if(player.body.velocity.x < -0.1) {
+        player.anims.play('swimLeft', true);
+    } else {
+        player.anims.stop();
+    }
+
+    
 
     // Calculate buoyancy force
     let depth = FD.circle1.body.position.y/15;

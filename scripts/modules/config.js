@@ -39,7 +39,7 @@ FD.config = {
     height: 360,
     resolution: window.devicePixelRatio,
     backgroundColor: '#c4dedf',
-    pixelArt: true, // pixel graphics won't blur when scaling. https://www.html5gamedevs.com/topic/36607-scaling-the-canvas-for-pixel-art/
+    pixelArt: false, // pixel graphics won't blur when scaling. https://www.html5gamedevs.com/topic/36607-scaling-the-canvas-for-pixel-art/
     scale: {
         // parent: 'yourgamediv',
         mode: Phaser.Scale.FIT,
