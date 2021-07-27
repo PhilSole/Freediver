@@ -8,67 +8,67 @@ FD.timeElapsed = 0
 
 FD.update = function(time, delta) {
 
-    let player = FD.circle1;
+    // let player = FD.player;
 
-    if(player.body.velocity.x > 0.1) {
-        player.anims.play('swimRight', true);
-    } else if(player.body.velocity.x < -0.1) {
-        player.anims.play('swimLeft', true);
-    } else {
-        player.anims.stop();
-    }
+    // if(player.body.velocity.x > 0.1) {
+    //     player.anims.play('swimRight', true);
+    // } else if(player.body.velocity.x < -0.1) {
+    //     player.anims.play('swimLeft', true);
+    // } else {
+    //     player.anims.stop();
+    // }
 
     
 
-    // Calculate buoyancy force
-    let depth = FD.circle1.body.position.y/15;
-    let pressure = depth * 1025 * 9.8 + 100000;
-    let pressureRatio = 100000/pressure;
-    let airVolume = 10 * pressureRatio;
-    let buoyancyVariable = airVolume * 1.025 * 0.00015;
-    let buoyancyTotal = buoyancyConstant + buoyancyVariable;
+    // // Calculate buoyancy force
+    // let depth = player.body.position.y/15;
+    // let pressure = depth * 1025 * 9.8 + 100000;
+    // let pressureRatio = 100000/pressure;
+    // let airVolume = 10 * pressureRatio;
+    // let buoyancyVariable = airVolume * 1.025 * 0.00015;
+    // let buoyancyTotal = buoyancyConstant + buoyancyVariable;
 
-    // Pointer (swimming) force
-    let pointer = this.input.activePointer;
-    let swimVec = new Phaser.Math.Vector2();
+    // // Pointer (swimming) force
+    // let pointer = this.input.activePointer;
+    // let swimVec = new Phaser.Math.Vector2();
 
-    if(pointer.isDown) {
-        console.log(pointer);
-        let pointerX = pointer.worldX;
-        let pointerY = pointer.worldY;
+    // if(pointer.isDown) {
+    //     console.log(pointer);
+    //     let pointerX = pointer.worldX;
+    //     let pointerY = pointer.worldY;
     
-        let playerX = FD.circle1.body.position.x;
-        let playerY = FD.circle1.body.position.y;
+    //     let playerX = player.body.position.x;
+    //     let playerY = player.body.position.y;
 
-        swimVec.set(pointerX - playerX, pointerY - playerY);
-        swimVec.setLength(.0013);
+    //     swimVec.set(pointerX - playerX, pointerY - playerY);
+    //     swimVec.setLength(.0013);
 
-        // console.log(swimVec.angle());
+    //     // console.log(swimVec.angle());
 
-        FD.circle1.setRotation(swimVec.angle());
-    }
+    //     player.setRotation(swimVec.angle());
+    // }
 
-    swimVec.add({x:0, y: -buoyancyTotal});
+    // swimVec.add({x:0, y: -buoyancyTotal});
 
-    // Apply total forces
-    FD.circle1.applyForce(swimVec);
+    // // Apply total forces
+    // player.applyForce(swimVec);
 
-    // Calculate remaining oxygen
-    if(FD.timeStart == 0) {
-        FD.timeStart = time;
-        console.log('start');
-    } else {
-        FD.timeElapsed += delta;
-        FD.oxygen -= FD.timeElapsed/12000000;
-    }
+    // // Calculate remaining oxygen
+    // if(FD.timeStart == 0) {
+    //     FD.timeStart = time;
+    //     console.log('start');
+    // } else {
+    //     FD.timeElapsed += delta;
+    //     FD.oxygen -= FD.timeElapsed/12000000;
+    // }
 
 
-    FD.data.setText([
-        'Depth: ' + parseInt(FD.circle1.body.position.y / 15) + 'm',
-        'Pressure: ' + (pressure/100000).toFixed(1) + 'BAR',
-        'Lung volume: ' + airVolume.toFixed(1) + 'L',
-        'Oxygen: ' + Math.round(FD.oxygen) + '%',
-    ])
+    // FD.data.setText([
+    //     'Depth: ' + parseInt(player.body.position.y / 15) + 'm',
+    //     'Pressure: ' + (pressure/100000).toFixed(1) + 'BAR',
+    //     'Lung volume: ' + airVolume.toFixed(1) + 'L',
+    //     'Oxygen: ' + Math.round(FD.oxygen) + '%',
+    // ])
 } 
 
 // ======================================

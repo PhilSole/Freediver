@@ -17,7 +17,8 @@ FD.gameSceneConfig = {
             },
             plugins: {
                 attractors: true
-            }
+            },
+            constraintIterations: 10
         }
     },
     preload: FD.preload,

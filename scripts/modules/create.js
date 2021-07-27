@@ -30,35 +30,60 @@ FD.create = function() {
     //===========================
     // Player
     //===========================
-    let playerSprite = this.add.sprite(100, 150, 'swimmer');
-    FD.circle1 = this.matter.add.gameObject(playerSprite, {
-        frictionAir: 0.0027,
-        density: .046
-    });
+    // let playerSprite = this.add.sprite(100, 150, 'swimmer');
 
-    FD.circle1.anims.create({
-        key: 'swimLeft',
-        frames: this.anims.generateFrameNumbers('swimmer', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
+    // FD.player = this.matter.add.gameObject(playerSprite, {
+    //     frictionAir: 0.0027,
+    //     density: .046
+    // });
 
-    FD.circle1.anims.create({
-        key: 'swimRight',
-        frames: this.anims.generateFrameNumbers('swimmer', { start: 8, end: 15 }),
-        frameRate: 10,
-        repeat: -1
-    });    
+    // FD.player.anims.create({
+    //     key: 'swimLeft',
+    //     frames: this.anims.generateFrameNumbers('swimmer', { start: 0, end: 7 }),
+    //     frameRate: 10,
+    //     repeat: -1
+    // });
+
+    // FD.player.anims.create({
+    //     key: 'swimRight',
+    //     frames: this.anims.generateFrameNumbers('swimmer', { start: 8, end: 15 }),
+    //     frameRate: 10,
+    //     repeat: -1
+    // });    
 
     //===========================
     // Other characters
     //===========================
 
+    upper = this.matter.add.rectangle(100, 100, 40, 15, {
+        label: 'upper',
+        chamfer: 5,
+        mass: 40,
+        ignoreGravity: true
+    });
+
+    lower = this.matter.add.rectangle(80, 100, 40, 15, {
+        label: 'lower',
+        chamfer: 5,
+        mass: 40,
+        ignoreGravity: true
+    });
+
+    groupBody = this.matter.world.nextGroup(true);
+
+    lower.collisionFilter.group = groupBody;
+    upper.collisionFilter.group = groupBody;
+
+    this.matter.add.joint(upper, lower, 0, .1, {
+        pointA: { x: -10, y: 0 },
+        pointB: { x: 10, y: 0 },
+        angularStiffness: .85
+    });
 
     //===========================
     // Physics experiments
     //===========================
-    let circle = this.add.circle(60, 90, 15);
+    // let circle = this.add.circle(60, 90, 15);
 
     // FD.circle1 = this.matter.add.gameObject(circle, {
     //     shape: 'circle',
@@ -70,7 +95,7 @@ FD.create = function() {
     // Camera
     //===========================    
     // this.cameras.main.setDeadzone(30, 30);
-    this.cameras.main.startFollow(FD.circle1, true, 0.05, 0.05); // lerp (linear interpolation for follow)
+    // this.cameras.main.startFollow(FD.player, true, 0.05, 0.05); // lerp (linear interpolation for follow)
     this.cameras.main.setZoom(1);
 
     //===========================
@@ -86,7 +111,9 @@ FD.create = function() {
     // Controls
     //===========================
     // this.input.setDefaultCursor('url(assets/input/cursors/blue.cur), pointer');
-    // this.matter.add.mouseSpring();
+    this.matter.add.mouseSpring({
+        angularStiffness: .5
+    });
 
     // this.input.on('pointerdown', function (pointer) {
     //     console.log('click');
