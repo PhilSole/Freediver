@@ -6,8 +6,8 @@ FD.create = function() {
     //===========================
     // World
     //===========================
-    let worldWidth = 640;
-    let worldHeight = 360;
+    let worldWidth = 1280;
+    let worldHeight = 720;
 
     this.cameras.main.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight);
     this.matter.world.setBounds(-2.5 * worldWidth, 0, 5 * worldWidth, 5 * worldHeight, 64, true, true, true, true); 
@@ -54,17 +54,20 @@ FD.create = function() {
     //===========================
     // Other characters
     //===========================
+    // const group = this.matter.world.nextGroup();
+    // const particleOptions = { friction: 0.00001, collisionFilter: { group: group }, render: { visible: true } };
+    // const constraintOptions = { stiffness: 0.5 };
 
-    upper = this.matter.add.rectangle(100, 100, 40, 15, {
+    // this.cloth = this.matter.add.softBody(200, 140, 3, 2, 5, 5, false, 8, particleOptions, constraintOptions);
+
+    upper = this.matter.add.rectangle(145, 100, 60, 20, {
         label: 'upper',
-        chamfer: 5,
         mass: 40,
         ignoreGravity: true
     });
 
-    lower = this.matter.add.rectangle(80, 100, 40, 15, {
+    lower = this.matter.add.rectangle(55, 100, 60, 20, {
         label: 'lower',
-        chamfer: 5,
         mass: 40,
         ignoreGravity: true
     });
@@ -74,11 +77,33 @@ FD.create = function() {
     lower.collisionFilter.group = groupBody;
     upper.collisionFilter.group = groupBody;
 
-    this.matter.add.joint(upper, lower, 0, .1, {
-        pointA: { x: -10, y: 0 },
-        pointB: { x: 10, y: 0 },
-        angularStiffness: .85
+    this.matter.add.constraint(upper, lower, 30, .000015, {
+        pointA: { x: -30, y: 0 },
+        pointB: { x: 30, y: 0 },
+        // angularStiffness: .15,
+        // damping: .15
     });
+
+    // this.matter.add.constraint(upper, lower, 10, .000015, {
+    //     pointA: { x: 0, y: 10 },
+    //     pointB: { x: 30, y: 10 },
+    //     // angularStiffness: .15,
+    //     // damping: .15
+    // });
+  
+    // this.matter.add.constraint(upper, lower, 10, .000015, {
+    //     pointA: { x: -30, y: 10 },
+    //     pointB: { x: 0, y: 10 },
+    //     // angularStiffness: .15,
+    //     // damping: .15
+    // });
+
+    // this.matter.add.constraint(upper, lower, 10, .000015, {
+    //     pointA: { x: 0, y: -10 },
+    //     pointB: { x: 30, y: -10 },
+    //     // angularStiffness: .15,
+    //     // damping: .15
+    // });    
 
     //===========================
     // Physics experiments
@@ -112,7 +137,8 @@ FD.create = function() {
     //===========================
     // this.input.setDefaultCursor('url(assets/input/cursors/blue.cur), pointer');
     this.matter.add.mouseSpring({
-        angularStiffness: .5
+        angularStiffness: .001,
+        // stiffness: 0.00015,
     });
 
     // this.input.on('pointerdown', function (pointer) {
@@ -121,7 +147,7 @@ FD.create = function() {
 
     this.input.setPollRate(200); // Fixed and issue where pointer wasn't polled if mouse wasn't moving for a few seconds
     
-    let pause = this.add.image(600, 40, 'stop').setScrollFactor(0).setInteractive();
+    let pause = this.add.image(worldWidth - 40, 40, 'stop').setScrollFactor(0).setInteractive();
 
     pause.displayWidth = 40;
     pause.displayHeight = 40;
